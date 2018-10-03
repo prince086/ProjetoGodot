@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://Scripts/Nave.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/SpaceshipFrames/blueship0006.png" type="Texture" id=2]
+
+[node name="Nave" type="Area2D"]
+
+transform/pos = Vector2( 300, 800 )
+transform/rot = 180.0
+transform/scale = Vector2( 0.15, 0.15 )
+input/pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 1 )
+
+[node name="sprite" type="Sprite" parent="."]
+
+texture = ExtResource( 2 )
+
+[node name="PosCanhão" type="Position2D" parent="."]
+
+transform/pos = Vector2( 0.400146, 373.258 )
+transform/rot = -3.39282e-14
+
+
