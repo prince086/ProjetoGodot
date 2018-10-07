@@ -9,4 +9,6 @@
 
 [node name="Meteoro_Spawner" parent="." instance=ExtResource( 2 )]
 
+[connection signal="area_enter" from="Nave" to="Nave" method="_on_Nave_area_enter"]
+
 
