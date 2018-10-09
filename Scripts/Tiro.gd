@@ -4,6 +4,7 @@ var vel = 500
 
 func _ready():
 	set_process(true)
+	pass
 
 func _process(delta):
 	
@@ -11,8 +12,14 @@ func _process(delta):
 	
 	if get_pos().y < -30:
 		free()
+		pass
+	pass
 
 func _on_Tiro_area_enter( area ):
 	if area.is_in_group(game.GRUPO_INIMIGO):
-		area.queue_free()
+		if area.has_method("destroyMeteoro"):
+			area.destroyMeteoro()
+			pass
+		pass
 	queue_free()
+	pass

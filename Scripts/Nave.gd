@@ -54,7 +54,8 @@ func dispara(node):
 
 func _on_Nave_area_enter( area ):
 	if area.is_in_group(game.GRUPO_INIMIGO):
-		area.queue_free()
-		get_node("AnimationPlayer").play("hit")		
+		if area.has_method("destroyMeteoro"):
+			area.destroyMeteoro()
+			get_node("AnimationPlayer").play("hit")	
 		pass
 	pass

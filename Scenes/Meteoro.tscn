@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=1]
+[gd_scene load_steps=9 format=1]
 
 [ext_resource path="res://Scripts/Meteoro.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Asteroids/medium/a10009.png" type="Texture" id=2]
@@ -22,6 +22,72 @@ points = Vector2Array( 15.6075, -23.0656, 27.7961, -13.7449, 27.0791, -4.42428 )
 
 custom_solver_bias = 0.0
 points = Vector2Array( -15.9393, -18.0468, -7.33563, -21.6316, -0.165894, -23.7826, 22.0603, 8.48125, 16.3245, 14.217, -23.826, -10.1601 )
+
+[sub_resource type="Animation" id=5]
+
+resource/name = "DestroyMeteor"
+length = 0.2
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:transform/scale")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0, 0.2 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 2, 2 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:modulate")
+tracks/1/interp = 1
+tracks/1/imported = false
+tracks/1/keys = {
+"times": FloatArray( 0, 0.2 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.980469, 0.930679, 0.930679, 1 ), Color( 0.980469, 0.930679, 0.930679, 0 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/imported = false
+tracks/2/keys = {
+"times": FloatArray( 0.3 ),
+"transitions": FloatArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free()"
+} ]
+}
+
+[sub_resource type="Animation" id=6]
+
+resource/name = "IdleMeteor"
+length = 1.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:transform/scale")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0 ),
+"transitions": FloatArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:modulate")
+tracks/1/interp = 1
+tracks/1/imported = false
+tracks/1/keys = {
+"times": FloatArray( 0 ),
+"transitions": FloatArray( 1 ),
+"update": 0,
+"values": [ Color( 0.980469, 0.930679, 0.930679, 1 ) ]
+}
 
 [node name="Meteoro" type="Area2D"]
 
@@ -57,5 +123,19 @@ build_mode = 0
 polygon = Vector2Array( -23.826, -10.1601, -15.9393, -18.0468, -7.33563, -21.6316, -0.165894, -23.7826, 15.6075, -23.0656, 27.7961, -13.7449, 27.0791, -4.42428, 29.23, 5.61336, 22.0603, 8.48125, 16.3245, 14.217, 8.43779, 22.8207, -8.76958, 24.9716, -24.543, 13.5001, -28.8448, 4.89639, -30.9958, -5.85822 )
 shape_range = Vector2( 0, 3 )
 trigger = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/DestroyMeteor = SubResource( 5 )
+anims/IdleMeteor = SubResource( 6 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = "IdleMeteor"
+
+[connection signal="area_enter" from="." to="." method="_on_Meteoro_area_enter"]
 
 
