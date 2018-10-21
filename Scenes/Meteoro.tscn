@@ -1,24 +1,24 @@
-[gd_scene load_steps=9 format=1]
+[gd_scene load_steps=10 format=1]
 
 [ext_resource path="res://Scripts/Meteoro.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Asteroids/medium/a10009.png" type="Texture" id=2]
 
-[sub_resource type="ConvexPolygonShape2D" id=1]
+[sub_resource type="ConvexPolygonShape2D" id=8]
 
 custom_solver_bias = 0.0
 points = Vector2Array( 27.0791, -4.42428, 29.23, 5.61336, 22.0603, 8.48125, -0.165894, -23.7826, 15.6075, -23.0656 )
 
-[sub_resource type="ConvexPolygonShape2D" id=2]
+[sub_resource type="ConvexPolygonShape2D" id=9]
 
 custom_solver_bias = 0.0
 points = Vector2Array( -8.76958, 24.9716, -24.543, 13.5001, -28.8448, 4.89639, -30.9958, -5.85822, -23.826, -10.1601, 16.3245, 14.217, 8.43779, 22.8207 )
 
-[sub_resource type="ConvexPolygonShape2D" id=3]
+[sub_resource type="ConvexPolygonShape2D" id=10]
 
 custom_solver_bias = 0.0
 points = Vector2Array( 15.6075, -23.0656, 27.7961, -13.7449, 27.0791, -4.42428 )
 
-[sub_resource type="ConvexPolygonShape2D" id=4]
+[sub_resource type="ConvexPolygonShape2D" id=11]
 
 custom_solver_bias = 0.0
 points = Vector2Array( -15.9393, -18.0468, -7.33563, -21.6316, -0.165894, -23.7826, 22.0603, 8.48125, 16.3245, 14.217, -23.826, -10.1601 )
@@ -26,7 +26,7 @@ points = Vector2Array( -15.9393, -18.0468, -7.33563, -21.6316, -0.165894, -23.78
 [sub_resource type="Animation" id=5]
 
 resource/name = "DestroyMeteor"
-length = 0.2
+length = 1.0
 loop = false
 step = 0.1
 tracks/0/type = "value"
@@ -34,7 +34,7 @@ tracks/0/path = NodePath("Sprite:transform/scale")
 tracks/0/interp = 1
 tracks/0/imported = false
 tracks/0/keys = {
-"times": FloatArray( 0, 0.2 ),
+"times": FloatArray( 0, 0.5 ),
 "transitions": FloatArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 1, 1 ), Vector2( 2, 2 ) ]
@@ -44,7 +44,7 @@ tracks/1/path = NodePath("Sprite:modulate")
 tracks/1/interp = 1
 tracks/1/imported = false
 tracks/1/keys = {
-"times": FloatArray( 0, 0.2 ),
+"times": FloatArray( 0, 0.5 ),
 "transitions": FloatArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 0.980469, 0.930679, 0.930679, 1 ), Color( 0.980469, 0.930679, 0.930679, 0 ) ]
@@ -54,12 +54,22 @@ tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/imported = false
 tracks/2/keys = {
-"times": FloatArray( 0.3 ),
+"times": FloatArray( 1 ),
 "transitions": FloatArray( 1 ),
 "values": [ {
 "args": [  ],
 "method": "queue_free()"
 } ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Particles2D:config/emitting")
+tracks/3/interp = 1
+tracks/3/imported = false
+tracks/3/keys = {
+"times": FloatArray( 0 ),
+"transitions": FloatArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -69,39 +79,44 @@ length = 1.0
 loop = false
 step = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:transform/scale")
+tracks/0/path = NodePath("Sprite:modulate")
 tracks/0/interp = 1
 tracks/0/imported = false
 tracks/0/keys = {
 "times": FloatArray( 0 ),
 "transitions": FloatArray( 1 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ) ]
+"values": [ Color( 0.980469, 0.930679, 0.930679, 1 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:modulate")
+tracks/1/path = NodePath("Particles2D:config/emitting")
 tracks/1/interp = 1
 tracks/1/imported = false
 tracks/1/keys = {
 "times": FloatArray( 0 ),
 "transitions": FloatArray( 1 ),
-"update": 0,
-"values": [ Color( 0.980469, 0.930679, 0.930679, 1 ) ]
+"update": 1,
+"values": [ false ]
 }
+
+[sub_resource type="ColorRamp" id=7]
+
+offsets = FloatArray( 0.0877193, 0.461988, 0.894737, 1 )
+colors = ColorArray( 0.988281, 0.965118, 0.965118, 1, 0.964966, 0.996094, 0, 1, 0.902344, 0, 0.0845947, 1, 0.976326, 0.757576, 0.778084, 0 )
 
 [node name="Meteoro" type="Area2D"]
 
 input/pickable = true
-shapes/0/shape = SubResource( 1 )
+shapes/0/shape = SubResource( 8 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
-shapes/1/shape = SubResource( 2 )
+shapes/1/shape = SubResource( 9 )
 shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/1/trigger = false
-shapes/2/shape = SubResource( 3 )
+shapes/2/shape = SubResource( 10 )
 shapes/2/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/2/trigger = false
-shapes/3/shape = SubResource( 4 )
+shapes/3/shape = SubResource( 11 )
 shapes/3/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/3/trigger = false
 gravity_vec = Vector2( 0, 1 )
@@ -118,7 +133,6 @@ modulate = Color( 0.980469, 0.930679, 0.930679, 1 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 
-visibility/visible = false
 build_mode = 0
 polygon = Vector2Array( -23.826, -10.1601, -15.9393, -18.0468, -7.33563, -21.6316, -0.165894, -23.7826, 15.6075, -23.0656, 27.7961, -13.7449, 27.0791, -4.42428, 29.23, 5.61336, 22.0603, 8.48125, 16.3245, 14.217, 8.43779, 22.8207, -8.76958, 24.9716, -24.543, 13.5001, -28.8448, 4.89639, -30.9958, -5.85822 )
 shape_range = Vector2( 0, 3 )
@@ -134,8 +148,37 @@ anims/IdleMeteor = SubResource( 6 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
-autoplay = "IdleMeteor"
+autoplay = ""
 
-[connection signal="area_enter" from="." to="." method="_on_Meteoro_area_enter"]
+[node name="Particles2D" type="Particles2D" parent="."]
+
+visibility/blend_mode = 1
+config/amount = 100
+config/lifetime = 0.7
+config/emit_timeout = 0.7
+config/emitting = false
+config/process_mode = 1
+config/explosiveness = 0.38
+params/direction = 0.0
+params/spread = 180.0
+params/linear_velocity = 100.0
+params/spin_velocity = 0.0
+params/orbit_velocity = 0.0
+params/gravity_direction = 0.0
+params/gravity_strength = 0.0
+params/radial_accel = 0.0
+params/tangential_accel = 0.0
+params/damping = 0.0
+params/initial_angle = 0.0
+params/initial_size = 10.0
+params/final_size = 20.0
+params/hue_variation = 0.0
+params/anim_speed_scale = 1.0
+params/anim_initial_pos = 0.0
+randomness/spread = 1.0
+randomness/linear_velocity = 0.28
+randomness/initial_size = 0.5
+randomness/final_size = 0.62
+color/color_ramp = SubResource( 7 )
 
 

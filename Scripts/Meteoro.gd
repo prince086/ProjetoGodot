@@ -18,7 +18,9 @@ func _process(delta):
 		free()
 	pass
 
-func destroyMeteoro():
+func DestroyMeteor():
+	set_process(false)
+	set_z(10)
 	remove_from_group(game.GRUPO_INIMIGO)
 	get_node("AnimationPlayer").play("DestroyMeteor")
-	pass # replace with function body
+	pass

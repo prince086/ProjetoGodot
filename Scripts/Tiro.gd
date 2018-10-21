@@ -12,14 +12,12 @@ func _process(delta):
 	
 	if get_pos().y < -30:
 		free()
-		pass
 	pass
 
 func _on_Tiro_area_enter( area ):
 	if area.is_in_group(game.GRUPO_INIMIGO):
-		if area.has_method("destroyMeteoro"):
-			area.destroyMeteoro()
-			pass
+		if area.has_method("DestroyMeteor"):
+		  area.DestroyMeteor()
+		queue_free()
 		pass
-	queue_free()
 	pass

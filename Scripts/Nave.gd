@@ -9,14 +9,14 @@ var vida = 3
 func _ready():
 	set_process(true);
 	pass
-	
+
 func _process(delta):
-	
+
 	var d = 0
 	var e = 0
 	var c = 0
 	var b = 0
-	
+
 	if Input.is_action_pressed("direita"):
 		d = 1
 	if Input.is_action_pressed("esquerda"):
@@ -35,7 +35,7 @@ func _process(delta):
 		b = 0
 	set_pos(get_pos() + Vector2(1, 0) * vel * delta * (d + e) )
 	set_pos(get_pos() + Vector2(0, 1) * vel * delta * (c + b) )
-	
+
 	#Disparo	
 	if Input.is_action_pressed("tiro"):
 		if ultimo_disparo <= 0:
@@ -45,7 +45,7 @@ func _process(delta):
 			ultimo_disparo -= delta
 			pass
 	pass
-	
+
 func dispara(node):
 	var tiro = pre_tiro.instance()
 	tiro.set_global_pos(node.get_global_pos())
@@ -54,8 +54,18 @@ func dispara(node):
 
 func _on_Nave_area_enter( area ):
 	if area.is_in_group(game.GRUPO_INIMIGO):
-		if area.has_method("destroyMeteoro"):
-			area.destroyMeteoro()
-			get_node("AnimationPlayer").play("hit")	
+		get_node("AnimationPlayer").play("HitShip")
+		if area.has_method("DestroyMeteor"):
+			area.DestroyMeteor()
+			DamageNave()
+			print(vida)
+			pass
+		pass
+	pass
+
+func DamageNave():
+	vida -= 1	
+	if vida == 0:
+		queue_free()
 		pass
 	pass
