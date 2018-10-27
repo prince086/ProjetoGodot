@@ -19,8 +19,10 @@ func _process(delta):
 	pass
 
 func DestroyMeteor():
+	get_node("SampleMeteor").play("explosion_asteroid")
 	set_process(false)
 	set_z(10)
 	remove_from_group(game.GRUPO_INIMIGO)
 	get_node("AnimationPlayer").play("DestroyMeteor")
+	game.getCamera().shake()
 	pass

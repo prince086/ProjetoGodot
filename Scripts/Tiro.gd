@@ -4,6 +4,7 @@ var vel = 500
 
 func _ready():
 	set_process(true)
+	get_node("SampleLaser").play("weapon_player")
 	pass
 
 func _process(delta):
