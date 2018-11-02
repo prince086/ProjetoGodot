@@ -2,6 +2,7 @@ extends Area2D
 
 var vel = 200
 var rot = 0
+var pontos = 100
 	
 func _ready():
 	add_to_group(game.GRUPO_INIMIGO)
@@ -19,6 +20,7 @@ func _process(delta):
 	pass
 
 func DestroyMeteor():
+	game.score += pontos
 	get_node("SampleMeteor").play("explosion_asteroid")
 	set_process(false)
 	set_z(10)

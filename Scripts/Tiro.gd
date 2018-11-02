@@ -1,6 +1,7 @@
 extends Area2D
 
 var vel = 500
+var dano 
 
 func _ready():
 	set_process(true)

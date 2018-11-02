@@ -2,13 +2,22 @@ extends Area2D
 
 var vel = 200
 var vida = 3
-var value
 var arma
 
+var TiroSimples = preload("res://Scripts/Class/armas/TiroSimples.gd")
+var TiroDuplo = preload("res://Scripts/Class/armas/TiroDuplo.gd")
+var TiroRapido = preload("res://Scripts/Class/armas/TiroRapido.gd")
+
+var armas = [
+	TiroSimples.new(self),
+	TiroRapido.new(self),
+	TiroDuplo.new(self)
+]
+
 func _ready():
-	game.add_to_group(game.GRUPO_NAVE)
 	set_process(true);
 	arma = TiroSimples.new(self)
+	add_to_group(game.GRUPO_NAVE)
 	pass
 
 func _process(delta):
@@ -45,109 +54,17 @@ func _process(delta):
 	arma.atualiza_disparo(delta)
 	
 	pass
-		
-class TiroSimples:
-	
-	var pre_tiro = preload("res://Scenes/Tiro.tscn")
-	var ultimo_disparo = 0
-	var intervalo = 0.3
-	var nave
-	
-	func _init(nave):
-		self.nave = nave
-		pass
-	
-	func dispara():
-		if ultimo_disparo <= 0:
-			criaTiro(nave.get_node("PosCannon"))
-			ultimo_disparo = intervalo
-		pass
-		
-	func atualiza_disparo(delta):
-		if ultimo_disparo > 0:
-			ultimo_disparo -= delta
-			pass
-		pass
-		
-	func criaTiro(node):
-		var tiro = pre_tiro.instance()
-		tiro.set_global_pos(node.get_global_pos())
-		nave.get_owner().add_child(tiro)
-		pass
-		
-class TiroDuplo:
-	
-	var pre_tiro = preload("res://Scenes/Tiro.tscn")
-	var ultimo_disparo = 0
-	var intervalo = 0.3
-	var nave
-	
-	func _init(nave):
-		self.nave = nave
-		pass
-	
-	func dispara():
-		if ultimo_disparo <= 0:
-			criaTiro(nave.get_node("PosCannonL"))
-			criaTiro(nave.get_node("PosCannonR"))
-			ultimo_disparo = intervalo
-		pass
-		
-	func atualiza_disparo(delta):
-		if ultimo_disparo > 0:
-			ultimo_disparo -= delta
-			pass
-		pass
-		
-	func criaTiro(node):
-		var tiro = pre_tiro.instance()
-		tiro.set_global_pos(node.get_global_pos())
-		nave.get_owner().add_child(tiro)
-		pass
 
-class TiroRapido:
-	
-	var pre_tiro = preload("res://Scenes/Tiro.tscn")
-	var ultimo_disparo = 0
-	var intervalo = 0.2
-	var nave
-	
-	func _init(nave):
-		self.nave = nave
-		pass
-	
-	func dispara():
-		if ultimo_disparo <= 0:
-			criaTiro(nave.get_node("PosCannon"))
-			ultimo_disparo = intervalo
-		pass
-		
-	func atualiza_disparo(delta):
-		if ultimo_disparo > 0:
-			ultimo_disparo -= delta
-			pass
-		pass
-		
-	func criaTiro(node):
-		var tiro = pre_tiro.instance()
-		tiro.set_global_pos(node.get_global_pos())
-		nave.get_owner().add_child(tiro)
-		pass
-
-func set_arma():
-	if value == 1:
-		arma = TiroDuplo.new(self)
-	elif value == 2:
-		arma = TiroRapido.new(self)
+func set_arma(value):
+	arma = armas[value]
 	pass
 
-func _on_Nave_area_enter( area ):
+func _on_Nave_area_enter(area):
 	if area.is_in_group(game.GRUPO_INIMIGO):
 		get_node("AnimationPlayer").play("HitShip")
 		if area.has_method("DestroyMeteor"):
 			area.DestroyMeteor()
 			DamageNave()
-			print(vida)
 			pass
 		pass
 	pass
