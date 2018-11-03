@@ -1,7 +1,6 @@
 extends Area2D
 
 var vel = 200
-var vida = 3
 var arma
 
 var TiroSimples = preload("res://Scripts/Class/armas/TiroSimples.gd")
@@ -70,8 +69,8 @@ func _on_Nave_area_enter(area):
 	pass
 
 func DamageNave():
-	vida -= 1	
-	if vida == 0:
+	game.lifes -= 1	
+	if game.lifes == 0:
 		queue_free()
 		pass
 	pass
