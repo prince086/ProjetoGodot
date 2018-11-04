@@ -202,4 +202,13 @@ config/polyphony = 1
 config/samples = SubResource( 8 )
 config/pitch_random = 0.0
 
+[node name="Timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 5.0
+one_shot = false
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="queue_free"]
+
 

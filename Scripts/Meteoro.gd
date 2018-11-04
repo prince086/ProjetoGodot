@@ -15,10 +15,6 @@ func _process(delta):
 	set_pos(get_pos() + Vector2(0,1) * vel * delta)
 	rotate(rot * delta)
 
-	if get_pos().y > 910:
-		free()
-	pass
-
 func DestroyMeteor():
 	game.score += pontos
 	get_node("SampleMeteor").play("explosion_asteroid")

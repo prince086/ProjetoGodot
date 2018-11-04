@@ -1,24 +1,51 @@
 extends Node
 
 var paths = []
-const path_dir = "res://Paths"
+var enemies = []
+
+const path_dir = "res://Paths/"
+const enemie_dir = "res://Sprites/Enemies/"
 
 func _ready():
 	loadPath()
+	loadEnemie()
 	pass
 
-func loadPath():
+func random_path():
+	return paths[randi() % paths.size()]
+	
+func random_enemie():
+	return enemies[randi() % enemies.size()]
+	
+func loadFilesInDirectory(path):
+	
+	var files = []
+	
 	var dir = Directory.new()
-	dir.change_dir(path_dir)
-	dir.list_dir_begin()
+	if dir.open(path) == OK:
+		dir.list_dir_begin()
+		var file_name  = dir.get_next()
+		while file_name != "":
+			if !dir.current_is_dir():
+				files.append(path + file_name)
+			file_name = dir.get_next()
+			
+	return files
+
+func loadPath():
 	
-	var path_file = dir.get_next()
+	var pt = loadFilesInDirectory(path_dir)
 	
-	while path_file != "":
-		var path = load(path_dir + path_file)
-		if path && path_file extends Curve2D:
+	for i in range (pt.size()):
+		var path = load(pt[i])
+		if path && path extends Curve2D:
 			paths.append(path)
-		path_file = dir.get_next()
-		pass
-	print("Caminhos carregados: "+str(paths.size()))
-	pass
+			
+func loadEnemie():
+	
+	var en = loadFilesInDirectory(enemie_dir)
+	
+	for i in range (en.size()):
+		var enemie = load(en[i])
+		if enemie && enemie extends Texture:
+			enemies.append(enemie)

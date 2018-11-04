@@ -4,6 +4,7 @@ onready var follow = get_node("follow")
 var vel = 200
 
 func _ready():
+	set_curve(recursos.random_path())
 	set_process(true)
 	pass
 

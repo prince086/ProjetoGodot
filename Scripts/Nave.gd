@@ -66,6 +66,11 @@ func _on_Nave_area_enter(area):
 			DamageNave()
 			pass
 		pass
+	elif area.is_in_group(game.GRUPO_TIRO_INIMINGO):
+		if area.has_method("Destroy"):
+			area.Destroy()
+			DamageNave()
+		pass
 	pass
 
 func DamageNave():
