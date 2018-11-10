@@ -61,12 +61,13 @@ func set_arma(value):
 func _on_Nave_area_enter(area):
 	if area.is_in_group(game.GRUPO_INIMIGO):
 		get_node("AnimationPlayer").play("HitShip")
-		if area.has_method("DestroyMeteor"):
-			area.DestroyMeteor()
+		if area.has_method("DamageEnemy"):
+			area.DamageEnemy()
 			DamageNave()
 			pass
 		pass
 	elif area.is_in_group(game.GRUPO_TIRO_INIMINGO):
+		get_node("AnimationPlayer").play("HitShip")
 		if area.has_method("Destroy"):
 			area.Destroy()
 			DamageNave()

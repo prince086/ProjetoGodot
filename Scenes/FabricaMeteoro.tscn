@@ -1,0 +1,227 @@
+[gd_scene load_steps=16 format=1]
+
+[ext_resource path="res://Scripts/FabricaMeteoro.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Meteoro.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/Asteroids/large/a10009.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/MeteorParticles/Particles2D.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/MeteorParticles/AnimationPlayer.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/MeteorParticles/SampleMeteor.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Sprites/Asteroids/medium/a10009.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Asteroids/small/a10009.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Asteroids/small/b40013.png" type="Texture" id=9]
+
+[sub_resource type="ConvexPolygonShape2D" id=1]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -15.2279, -69.3437, 19.1489, -76.7101, 74.3974, -42.3333, 91.5858, 1.86551, 74.3974, 38.6978, 30.1986, 55.8862, -11.5447, 65.7082, -52.0602, 39.9256, -69.2487, 5.54874 )
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -21.7236, 18.6371, -25.4622, -6.37248, -11.545, -19.3853, 11.2926, -25.485, 29.768, -13.3979, 33.3605, 6.36053, 16.5958, 15.9404, -7.06241, 25.1531 )
+
+[sub_resource type="ConvexPolygonShape2D" id=3]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -7.06241, 25.1531, 16.5958, 15.9404, 5.41183, 24.5015 )
+
+[sub_resource type="ConvexPolygonShape2D" id=4]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -8.45325, -13.7471, 9.4147, -12.3622, 15.8854, -7.83273, 17.8266, 2.52042, 14.5913, 8.66757, 9.4147, 10.2852, 1.32086, 12.3172, -10.0823, 12.3172, -13.3403, -3.97298 )
+
+[sub_resource type="ConvexPolygonShape2D" id=5]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -11.4498, 6.80731, -11.6247, -3.6822, 6.14624, -14.5182, 18.4454, -6.65425, 18.4454, 2.43668, 14.2495, 7.33179, 7.90677, 11.0092, -3.93231, 14.4996 )
+
+[sub_resource type="ConvexPolygonShape2D" id=6]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -3.93231, 14.4996, 7.90677, 11.0092, 0.864716, 15.4106 )
+
+[node name="FabricaMeteoro" type="Node"]
+
+script/script = ExtResource( 1 )
+
+[node name="Meteoro1" type="Area2D" parent="."]
+
+editor/display_folded = true
+transform/pos = Vector2( 285.19, 125.843 )
+transform/scale = Vector2( 0.7, 0.7 )
+input/pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, -2.45547, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 2 )
+vida = 2
+pontos = 100
+
+[node name="Sprite" type="Sprite" parent="Meteoro1"]
+
+texture = ExtResource( 3 )
+modulate = Color( 0.980469, 0.930679, 0.930679, 1 )
+
+[node name="CollMeteoro" type="CollisionPolygon2D" parent="Meteoro1"]
+
+transform/pos = Vector2( -2.45547, 0 )
+build_mode = 0
+polygon = Vector2Array( -15.2279, -69.3437, 19.1489, -76.7101, 74.3974, -42.3333, 91.5858, 1.86551, 74.3974, 38.6978, 30.1986, 55.8862, -11.5447, 65.7082, -52.0602, 39.9256, -69.2487, 5.54874 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+[node name="Particles2D" parent="Meteoro1" instance=ExtResource( 4 )]
+
+[node name="AnimationPlayer" parent="Meteoro1" instance=ExtResource( 5 )]
+
+[node name="SampleMeteor" parent="Meteoro1" instance=ExtResource( 6 )]
+
+[node name="Timer" type="Timer" parent="Meteoro1"]
+
+process_mode = 1
+wait_time = 5.0
+one_shot = false
+autostart = true
+
+[node name="Meteoro2" type="Area2D" parent="."]
+
+editor/display_folded = true
+transform/pos = Vector2( 501.52, 140.648 )
+input/pickable = true
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, -2.45547, 0 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 3 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, -2.45547, 0 )
+shapes/1/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 2 )
+vida = 2
+pontos = 100
+
+[node name="Sprite" type="Sprite" parent="Meteoro2"]
+
+texture = ExtResource( 7 )
+
+[node name="CollMeteoro" type="CollisionPolygon2D" parent="Meteoro2"]
+
+transform/pos = Vector2( -2.45547, 0 )
+build_mode = 0
+polygon = Vector2Array( -11.545, -19.3853, 11.2926, -25.485, 29.768, -13.3979, 33.3605, 6.36053, 16.5958, 15.9404, 5.41183, 24.5015, -7.06241, 25.1531, -21.7236, 18.6371, -25.4622, -6.37248 )
+shape_range = Vector2( 0, 1 )
+trigger = false
+
+[node name="Particles2D" parent="Meteoro2" instance=ExtResource( 4 )]
+
+[node name="AnimationPlayer" parent="Meteoro2" instance=ExtResource( 5 )]
+
+[node name="SampleMeteor" parent="Meteoro2" instance=ExtResource( 6 )]
+
+[node name="Timer" type="Timer" parent="Meteoro2"]
+
+process_mode = 1
+wait_time = 5.0
+one_shot = false
+autostart = true
+
+[node name="Meteoro3" type="Area2D" parent="."]
+
+editor/display_folded = true
+transform/pos = Vector2( 422.228, 73.7178 )
+input/pickable = true
+shapes/0/shape = SubResource( 4 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, -2.45547, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 2 )
+vida = 2
+pontos = 100
+
+[node name="Sprite" type="Sprite" parent="Meteoro3"]
+
+texture = ExtResource( 8 )
+
+[node name="CollMeteoro" type="CollisionPolygon2D" parent="Meteoro3"]
+
+transform/pos = Vector2( -2.45547, 0 )
+build_mode = 0
+polygon = Vector2Array( -8.45325, -13.7471, 9.4147, -12.3622, 15.8854, -7.83273, 17.8266, 2.52042, 14.5913, 8.66757, 9.4147, 10.2852, 1.32086, 12.3172, -10.0823, 12.3172, -13.3403, -3.97298 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+[node name="Particles2D" parent="Meteoro3" instance=ExtResource( 4 )]
+
+[node name="AnimationPlayer" parent="Meteoro3" instance=ExtResource( 5 )]
+
+[node name="SampleMeteor" parent="Meteoro3" instance=ExtResource( 6 )]
+
+[node name="Timer" type="Timer" parent="Meteoro3"]
+
+process_mode = 1
+wait_time = 5.0
+one_shot = false
+autostart = true
+
+[node name="Meteoro4" type="Area2D" parent="."]
+
+editor/display_folded = true
+transform/pos = Vector2( 424.809, 195.602 )
+input/pickable = true
+shapes/0/shape = SubResource( 5 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, -2.28064, -1.52588e-05 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 6 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, -2.28064, -1.52588e-05 )
+shapes/1/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 2 )
+vida = 2
+pontos = 100
+
+[node name="Sprite" type="Sprite" parent="Meteoro4"]
+
+texture = ExtResource( 9 )
+
+[node name="CollMeteoro" type="CollisionPolygon2D" parent="Meteoro4"]
+
+transform/pos = Vector2( -2.28064, -1.52588e-05 )
+build_mode = 0
+polygon = Vector2Array( -11.6247, -3.6822, 6.14624, -14.5182, 18.4454, -6.65425, 18.4454, 2.43668, 14.2495, 7.33179, 7.90677, 11.0092, 0.864716, 15.4106, -3.93231, 14.4996, -11.4498, 6.80731 )
+shape_range = Vector2( 0, 1 )
+trigger = false
+
+[node name="Particles2D" parent="Meteoro4" instance=ExtResource( 4 )]
+
+[node name="AnimationPlayer" parent="Meteoro4" instance=ExtResource( 5 )]
+
+[node name="SampleMeteor" parent="Meteoro4" instance=ExtResource( 6 )]
+
+[node name="Timer" type="Timer" parent="Meteoro4"]
+
+process_mode = 1
+wait_time = 5.0
+one_shot = false
+autostart = true
+
+[connection signal="timeout" from="Meteoro1/Timer" to="Meteoro1" method="queue_free"]
+
+[connection signal="timeout" from="Meteoro2/Timer" to="Meteoro2" method="queue_free"]
+
+[connection signal="timeout" from="Meteoro3/Timer" to="Meteoro3" method="queue_free"]
+
+[connection signal="timeout" from="Meteoro4/Timer" to="Meteoro4" method="queue_free"]
+
+
