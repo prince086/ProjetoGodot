@@ -1,8 +1,9 @@
-[gd_scene load_steps=21 format=1]
+[gd_scene load_steps=25 format=1]
 
 [ext_resource path="res://Scripts/Nave.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/SpaceshipFrames/blueship0006.png" type="Texture" id=2]
 [ext_resource path="res://Scenes/Enemies/AnimationEnemy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Sprites/SpaceShooterRedux/PNG/Effects/shield3.png" type="Texture" id=4]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 
@@ -88,6 +89,72 @@ points = Vector2Array( -83.2617, -70.9141, -28.7573, -45.6084, -56.0095, -30.036
 
 custom_solver_bias = 0.0
 points = Vector2Array( -266.241, -222.748, -242.882, -257.787, -250.668, -140.992, -266.241, -148.778 )
+
+[sub_resource type="CircleShape2D" id=18]
+
+custom_solver_bias = 0.0
+radius = 10.0
+
+[sub_resource type="GDScript" id=19]
+
+resource/name = "Shield"
+script/source = "extends Area2D
+
+var ativo = true
+
+func _ready():
+	Ativar(3)
+	pass
+
+func _on_Shield_area_enter( area ):
+	if ativo && area.is_in_group(game.GRUPO_INIMIGO):
+		area.DamageEnemy(200)
+	elif ativo && area.is_in_group(game.GRUPO_TIRO_INIMINGO):
+		area.Destroy()
+		pass
+	pass # replace with function body
+	
+func Ativar(seconds):
+	show()
+	ativo = true
+	get_node(\"Timer\").set_wait_time(seconds)
+	get_node(\"Timer\").start()
+	pass
+
+
+
+func _on_Timer_timeout():
+	ativo = false
+	hide()
+	pass # replace with function body
+"
+
+[sub_resource type="Animation" id=20]
+
+resource/name = "default"
+length = 0.4
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:transform/scale")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0, 0.4 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.9, 0.9 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:visibility/opacity")
+tracks/1/interp = 1
+tracks/1/imported = false
+tracks/1/keys = {
+"times": FloatArray( 0, 0.4 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 0,
+"values": [ 0.6, 1.0 ]
+}
 
 [node name="Nave" type="Area2D"]
 
@@ -181,6 +248,56 @@ polygon = Vector2Array( -40.437, 335.922, -67.6892, 335.922, -157.232, -45.6084,
 shape_range = Vector2( 0, 16 )
 trigger = false
 
+[node name="Shield" type="Area2D" parent="."]
+
+transform/scale = Vector2( 0.987011, 0.987011 )
+input/pickable = true
+shapes/0/shape = SubResource( 18 )
+shapes/0/transform = Matrix32( 58, 0, 0, 58, -1.08459, -26.9038 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = SubResource( 19 )
+
+[node name="Sprite" type="Sprite" parent="Shield"]
+
+visibility/opacity = 0.651956
+transform/scale = Vector2( 8, 8 )
+texture = ExtResource( 4 )
+flip_v = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shield"]
+
+transform/pos = Vector2( -1.08459, -26.9038 )
+transform/scale = Vector2( 58, 58 )
+shape = SubResource( 18 )
+trigger = false
+_update_shape_index = 0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Shield"]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/default = SubResource( 20 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = "default"
+
+[node name="Timer" type="Timer" parent="Shield"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
 [connection signal="area_enter" from="." to="." method="_on_Nave_area_enter"]
+
+[connection signal="area_enter" from="Shield" to="Shield" method="_on_Shield_area_enter"]
+
+[connection signal="timeout" from="Shield/Timer" to="Shield" method="_on_Timer_timeout"]
 
 

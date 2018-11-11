@@ -1,7 +1,8 @@
 extends Area2D
 
 var vel = 500
-export var dano = 1 
+var dano = 1 
+
 
 func _ready():
 	set_process(true)
@@ -19,12 +20,12 @@ func _process(delta):
 func _on_Tiro_area_enter( area ):
 	if area.is_in_group(game.GRUPO_INIMIGO):
 		if area.has_method("DamageEnemy"):
-		  area.DamageEnemy()
+			area.DamageEnemy(dano)
 		queue_free()
 		pass
 	elif area.is_in_group(game.GRUPO_TIRO_INIMINGO):
 		if area.has_method("Destroy"):
-		  area.Destroy()
+			area.Destroy()
 		queue_free()
 		pass
 	pass

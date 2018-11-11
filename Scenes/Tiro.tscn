@@ -31,7 +31,6 @@ gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
 script/script = ExtResource( 1 )
-dano = 1
 
 [node name="Sprite" type="Sprite" parent="."]
 
@@ -45,16 +44,22 @@ shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
 
-[node name="SampleLaser" type="SamplePlayer2D" parent="."]
+[node name="SampleLaser" type="SamplePlayer" parent="."]
 
-params/volume_db = 0.0
-params/pitch_scale = 1.0
-params/attenuation/min_distance = 1.0
-params/attenuation/max_distance = 2048.0
-params/attenuation/distance_exp = 1.0
 config/polyphony = 1
 config/samples = SubResource( 2 )
-config/pitch_random = 0.0
+default/volume_db = 0.0
+default/pitch_scale = 1.0
+default/pan = 0.0
+default/depth = 0.0
+default/height = 0.0
+default/filter/type = 0
+default/filter/cutoff = 5000.0
+default/filter/resonance = 1.0
+default/filter/gain = 1.0
+default/reverb_room = 2
+default/reverb_send = 0.0
+default/chorus_send = 0.0
 
 [connection signal="area_enter" from="." to="." method="_on_Tiro_area_enter"]
 

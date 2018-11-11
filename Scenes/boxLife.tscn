@@ -1,15 +1,16 @@
 [gd_scene load_steps=4 format=1]
 
 [ext_resource path="res://Scripts/boxLife.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/SpaceShooterRedux/PNG/Power-ups/pill_blue.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/SpaceShooterRedux/PNG/Power-ups/powerupBlue_star.png" type="Texture" id=2]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 
 custom_solver_bias = 0.0
-points = Vector2Array( 7.27323, -10.3665, 10.6228, -4.50469, 9.78542, -0.736412, -1.62409, 10.5684, -8.95129, 9.31233, -10.9401, 5.85807, -10.9401, 1.46175, 0.0507011, -9.94776 )
+points = Vector2Array( -17.2067, -12.1585, -12.836, -16.1795, 11.6395, -16.1795, 15.8353, -11.8089, 15.8353, 11.268, 12.3388, 16.1631, -11.9619, 16.8624, -16.857, 13.0163 )
 
 [node name="boxLife" type="Area2D"]
 
+editor/display_folded = true
 input/pickable = true
 shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
@@ -27,7 +28,7 @@ texture = ExtResource( 2 )
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 
 build_mode = 0
-polygon = Vector2Array( 0.0507011, -9.94776, -10.9401, 1.46175, -10.9401, 5.85807, -8.95129, 9.31233, -1.62409, 10.5684, 9.78542, -0.736412, 10.6228, -4.50469, 7.27323, -10.3665 )
+polygon = Vector2Array( -17.2067, -12.1585, -12.836, -16.1795, 11.6395, -16.1795, 15.8353, -11.8089, 15.8353, 11.268, 12.3388, 16.1631, -11.9619, 16.8624, -16.857, 13.0163 )
 shape_range = Vector2( 0, 0 )
 trigger = false
 

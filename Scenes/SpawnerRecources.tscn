@@ -1,15 +1,15 @@
 [gd_scene load_steps=2 format=1]
 
-[ext_resource path="res://Scripts/Meteoro_Spawner.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/SpawnerRecources.gd" type="Script" id=1]
 
-[node name="Meteoro_Spawner" type="Node"]
+[node name="SpawnerRecources" type="Node2D"]
 
 script/script = ExtResource( 1 )
 
 [node name="Timer" type="Timer" parent="."]
 
 process_mode = 1
-wait_time = 1.0
+wait_time = 3.0
 one_shot = false
 autostart = true
 

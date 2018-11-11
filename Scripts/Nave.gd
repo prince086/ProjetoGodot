@@ -62,7 +62,7 @@ func _on_Nave_area_enter(area):
 	if area.is_in_group(game.GRUPO_INIMIGO):
 		get_node("AnimationPlayer").play("HitShip")
 		if area.has_method("DamageEnemy"):
-			area.DamageEnemy()
+			area.DamageEnemy(100)
 			DamageNave()
 			pass
 		pass
@@ -75,7 +75,9 @@ func _on_Nave_area_enter(area):
 	pass
 
 func DamageNave():
-	game.lifes -= 1	
+	game.lifes -= 1
+	get_node("Shield").Ativar(4)
+	set_arma(0)
 	if game.lifes == 0:
 		queue_free()
 		pass

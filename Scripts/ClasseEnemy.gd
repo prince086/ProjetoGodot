@@ -9,11 +9,9 @@ func _ready():
 	_Initial()
 	pass
 
-func DamageEnemy():
-	if vida == 0:
-		vida -= 1
-		pass
-	else: 
+func DamageEnemy(dano):
+	vida -= dano
+	if vida<=0 :
 		game.score += pontos
 		_DestroyEnemy()
 		set_process(false)
@@ -24,9 +22,7 @@ func DamageEnemy():
 	pass
 	
 func _Initial():
-	
 	pass
 
 func _DestroyEnemy():
-	
 	pass

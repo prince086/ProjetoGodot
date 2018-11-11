@@ -8,6 +8,7 @@ func _process(delta):
 	rotate(deg2rad(rot * delta))
 	
 func _Initial():
+	set_process(true)
 	rot = rand_range(-180,180)
 	pass
 	
